@@ -1,6 +1,25 @@
 .rb__content{
-    width: 1280;
     display: flex;
     justify-content: flex-start;
-    margin: 0 4pc 0 2pc;
+    margin: 0 4pc 0 5.6pc;
 }
+
+
+@media screen and (max-width: 550px){
+    .rb__content{
+        display: flex;
+        justify-content: flex-start;
+        margin: 0 4pc 0 4pc;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .rb__content{
+        display: flex;
+        justify-content: flex-start;
+        margin: 0 1pc 0 1pc;
+    }
+
+}
+
+

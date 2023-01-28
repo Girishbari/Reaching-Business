@@ -1,5 +1,5 @@
 .rb__posts {
-    height: 30vh;
+    height: 32vh;
     width: 70vw;
     display: flex;
     margin-left: auto;
@@ -63,9 +63,45 @@
 .rb__posts-image img {
 
     object-fit: cover;
-    height: 30vh;
+    height: 32vh;
     width: 30vw;
 }
+
+@media screen and (max-width: 900px) {
+
+    .rb__posts-container_content {
+        padding: 25px 4px 87px 30px;
+    }
+
+    .rb__posts-container_content-author p {
+        color: #9B9B9B;
+        font-size: 14px;
+        margin-right: 10px;
+    }
+
+    .rb__posts-container_content-author h5 {
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    .rb__posts-container_content-title h2 {
+        font-size: 20px;
+        line-height: 30px;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .rb__posts-container_content-content p {
+        color: #9B9B9B;
+        font-size: 14px;
+        line-height: 25px;
+        text-align: left;
+    }
+
+}
+
+
+
 
 @media screen and (max-width: 700px) {
 

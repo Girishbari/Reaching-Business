@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './home.css'
 import { Navbar, Posts, Recentposts } from '../../components'
 import image from '../../assets/post3.png'
+import Editpost from '../editpost/Editpost'
+import { useEffect } from 'react'
 
 
 // Api call to all post that would be random will be here
@@ -12,35 +14,53 @@ import image from '../../assets/post3.png'
 // then we again sends this IF to read Post Component
 
 const Home = () => {
+  const [editProduct, setEditProduct] = useState(false);
+
+
+  function togglePost() {
+    setEditProduct(true);
+  }
+  function toggleBackPost(){
+    setEditProduct(false);
+  }
+
   return (
     <>
-       <Navbar />
-        <div className='rb__content'>
-        
-        <Posts
-            className="rb__content-feed-section"
-            id={1}
-            img={image}
-            author="Girish bari"
-            title="Mind-Blowing Twitter Stats and Facts on Our Favorite Network (2018)"
-            content="User research is the reality check every project needs. Here’s our guide to why you should be doing it — and how to get started."
-        />
-        {/* <Posts 
-            className=""
-            id={1}
-            img={image}
-            author="Girish bari"
-            title="Mind-Blowing Twitter Stats and Facts on Our Favorite Network (2018)"
-            content="User research is the reality check every project needs. Here’s our guide to why you should be doing it — and how to get started."
-        /> */}
-        <Recentposts 
-            id={1}
-            author="Girish bari"
-            title="Mind-Blowing Twitter Stats and Facts on Our Favorite Network (2018)"
-            className="rb__content-recentposts-section"
-        />
-      
-    </div>
+      <Navbar
+        handleClick={togglePost}
+      />
+      <div className='rb__content'>
+        {editProduct
+          ? <Editpost
+             handleClick={toggleBackPost}
+            />
+          : <>
+            <Posts
+              className="rb__content-feed-section"
+              id={1}
+              img={image}
+              author="Girish bari"
+              title="Mind-Blowing Twitter Stats and Facts on Our Favorite Network (2018)"
+              content="User research is the reality check every project needs. Here’s our guide to why you should be doing it — and how to get started."
+            />
+            {/* <Posts 
+              className=""
+              id={1}
+              img={image}
+              author="Girish bari"
+              title="Mind-Blowing Twitter Stats and Facts on Our Favorite Network (2018)"
+              content="User research is the reality check every project needs. Here’s our guide to why you should be doing it — and how to get started."
+            /> */}
+            <Recentposts
+              id={1}
+              author="Girish bari"
+              title="Mind-Blowing Twitter Stats and Facts on Our Favorite Network (2018)"
+              className="rb__content-recentposts-section"
+            />
+          </>
+        }
+
+      </div>
     </>
 
   )

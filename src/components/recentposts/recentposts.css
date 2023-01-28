@@ -61,3 +61,48 @@
     font-size: 18px;
     line-height: 23px;
 }
+@media screen and (max-width: 1380px){
+    .rb__recentpost {
+        width: 300px;
+    }
+    
+    .rb__recentpost h2 {
+        font-weight: 600;
+        padding: 0 5pc;
+    }
+    
+    .rb__recentpost-list_post h4 {
+        font-size: 14px;
+    }
+    
+  
+}
+@media screen and (max-width: 1280px){
+    .rb__recentpost {
+        width: 280px;
+    }
+    
+    .rb__recentpost h2 {
+        font-weight: 600;
+        padding: 0 4pc;
+    }
+    
+    .rb__recentpost-list_post h4 {
+        font-size: 14px;
+    }
+    .rb__recentpost-list_post h3 {
+        /* white-space: nowrap;
+        overflow:hidden;
+        text-overflow: ellipsis; */
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 23px;
+    }
+    
+  
+}
+@media screen and (max-width: 1050px){
+    .rb__recentpost{
+        display: none;
+    }
+}

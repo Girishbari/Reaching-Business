@@ -7,6 +7,8 @@ import { BsChatLeftDots } from 'react-icons/bs'
 import { FaRegUserCircle } from 'react-icons/fa'
 import image from '../../assets/post3.png'
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 
 // css styling name convention bem
@@ -15,12 +17,21 @@ const Navbar = (props) => {
   const [search, setSearch] = useState(false);
   const [post, setPost] = useState(false)
   const [user, setUser] = useState(false)
+  const navigation = useNavigate();
 
   useEffect(() =>{
       setInterval(() =>{
         setPost(false)
       },5000)
   })
+  function handleClick(){
+      setPost(true)
+  }
+  function changeToUpdate(){
+    props.handleUpdate();
+    navigation('/Updateprofile')
+}
+  
 
 
   return (
@@ -30,7 +41,7 @@ const Navbar = (props) => {
         <div className='rb__navbar-links_container'>
           <p><li className='rb__navbar-links_option' href='#home'>Home</li></p>
           <p><li className='rb__navbar-links_option' href='#Products'>Products</li></p>
-          <div className='rb__navbar-links_container-post' >
+          <div className='rb__navbar-links_container-post' >  
             {post
               ? <button onClick={() => setPost(false)}>Post</button>
               : <button onClick={() => setPost(true)}>Post</button>
@@ -60,7 +71,7 @@ const Navbar = (props) => {
                   </div>
                   <h3>Hy, Girish</h3>
                   {/* {user} */}
-                  <button className='rb__navbar-buttons_container-user_container-button1'>Update</button>
+                  <button className='rb__navbar-buttons_container-user_container-button1' onClick={changeToUpdate}>Update</button>
                   <button className='rb__navbar-buttons_container-user_container-button2'>Log-out</button>
                 </div>
               )

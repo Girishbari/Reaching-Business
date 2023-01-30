@@ -3,6 +3,10 @@
     justify-content: flex-start;
     margin: 0 4pc 0 5.6pc;
 }
+.rb__content-cards_Post{
+    margin-right: 40px;
+    width: 130vh;
+}
 
 
 @media screen and (max-width: 550px){

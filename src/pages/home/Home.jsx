@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import './home.css'
-import { Navbar, Posts, Recentposts } from '../../components'
+import { Navbar, Posts, Recentposts, Readpost } from '../../components'
 import image from '../../assets/post3.png'
 import Editpost from '../editpost/Editpost'
-import { useEffect } from 'react'
+import post from '../post'
+import { useNavigate } from 'react-router-dom'
 
 
 // Api call to all post that would be random will be here
@@ -15,42 +16,58 @@ import { useEffect } from 'react'
 
 const Home = () => {
   const [editProduct, setEditProduct] = useState(false);
-
+  const [update, setUpdate] = useState(false)
+  const [read, setRead] = useState(false);
+  const navigation = useNavigate();
 
   function togglePost() {
     setEditProduct(true);
   }
-  function toggleBackPost(){
+  function toggleBackPost() {
     setEditProduct(false);
   }
+  function toggleUpdate() {
+    setUpdate(true)
+  }
+  function toggleReadpost() {
+    setRead(true);
+  }
+  const cardPost = post.map(item => {
+    return (
+      <Posts
+        className="rb__content-feed-section"
+        id={item.id}
+        img={image}
+        author={item.author}
+        title={item.title}
+        content={item.content}
+        handlePostClick={toggleReadpost}
+      />
+    )
+  })
 
   return (
     <>
       <Navbar
         handleClick={togglePost}
+        handleUpdate={toggleUpdate}
       />
       <div className='rb__content'>
-        {editProduct
-          ? <Editpost
-             handleClick={toggleBackPost}
-            />
-          : <>
-            <Posts
-              className="rb__content-feed-section"
-              id={1}
-              img={image}
-              author="Girish bari"
-              title="Mind-Blowing Twitter Stats and Facts on Our Favorite Network (2018)"
-              content="User research is the reality check every project needs. Here’s our guide to why you should be doing it — and how to get started."
-            />
-            {/* <Posts 
-              className=""
-              id={1}
-              img={image}
-              author="Girish bari"
-              title="Mind-Blowing Twitter Stats and Facts on Our Favorite Network (2018)"
-              content="User research is the reality check every project needs. Here’s our guide to why you should be doing it — and how to get started."
-            /> */}
+        {editProduct &&
+          <Editpost
+            handleClick={toggleBackPost}
+          />
+        }
+        {read &&
+          <Readpost
+
+          />
+        }
+        {!read && !update && !editProduct &&
+          <>
+            <div className="rb__content-cards_Post">
+              {cardPost}
+            </div>
             <Recentposts
               id={1}
               author="Girish bari"
@@ -58,6 +75,7 @@ const Home = () => {
               className="rb__content-recentposts-section"
             />
           </>
+
         }
 
       </div>

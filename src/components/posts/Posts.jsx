@@ -14,13 +14,13 @@ const Posts = (props) => {
           <h2>{props.title}</h2>
         </div>
         <div className='rb__posts-container_content-content'>
-          <p>{props.content} <a href='#'>Read more</a></p>
+          <p>{props.content} <button onClick={props.handlePostClick}>Read more</button></p>
           
         </div>
       </div>
       <div className='rb__posts-image'>
           {/* Giving problem <img src={props.img} alt='posts-img' /> */}
-          <img src={props.img} alt='posts-img' />
+          <img src={image} alt='posts-img' />
       </div>
     </div>
   )

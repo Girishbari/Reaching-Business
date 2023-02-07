@@ -36,6 +36,12 @@ a {
        /* global 92%+ browsers support */
        background:radial-gradient(circle at 16% 56%, rgba(146, 131, 224, 1) 0%, rgba(249, 249, 251, 1) 100%);
 }
+
+.fade-in {
+	-webkit-animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
 /* for animation in navigation */
 .scale-up-center {
 	-webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;

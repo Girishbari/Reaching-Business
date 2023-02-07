@@ -2,9 +2,11 @@ import React from 'react'
 import './readpost.css'
 import image from '../../assets/post3.png'
 import { AiOutlineLike, AiOutlineDislike } from 'react-icons/ai'
-
+import { useParams } from 'react-router-dom'
 
 const Readpost = () => {
+
+  const {id} = useParams();
   return (
     <div className="rb__readpost">
       <div className="rb__readpost-header">

@@ -1,12 +1,35 @@
 .rb__content{
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
     margin: 0 4pc 0 5.6pc;
 }
-.rb__content-cards_Post{
+.rb__content-post{
+    display: flex;
+}
+.rb__content-post_cards{
     margin-right: 40px;
     width: 130vh;
 }
+.rb__content-product {
+    display: flex;
+    flex-direction: row;
+}
+.rb__content-product button{
+    background-color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    height: 23vh;
+}
+.rb__content-product_cards{
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 29%;
+    overflow: hidden;
+    
+}
+
 
 
 @media screen and (max-width: 550px){

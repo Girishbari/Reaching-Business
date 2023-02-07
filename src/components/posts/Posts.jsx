@@ -1,8 +1,11 @@
 import React from 'react'
 import './posts.css'
 import image from '../../assets/post3.png'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const Posts = (props) => {
+
+  const navigate = useNavigate();
   console.log(props)
   return (
     <div className='rb__posts'>
@@ -14,8 +17,10 @@ const Posts = (props) => {
           <h2>{props.title}</h2>
         </div>
         <div className='rb__posts-container_content-content'>
-          <p>{props.content} <button onClick={props.handlePostClick}>Read more</button></p>
-          
+          <p>{props.content} <button onClick={ () => {
+            props.handlePostClick()
+            navigate('/Readpost')
+            }}>Read more</button></p>
         </div>
       </div>
       <div className='rb__posts-image'>

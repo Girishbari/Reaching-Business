@@ -9,7 +9,7 @@ export default [
     {
         id: 2,
         author: 'Girish Bari',
-        title: 'Mind-Blowing Twitter Stats and Facts on Our Favorite Network (2018)',
+        title: 'Twitter Stats and Facts on Our Favorite Network (2018)',
         content: 'User research is the reality check every project needs. Here’s our guide to why you should be doing it — and how to get started.',
         // image: 'post3.png'
     },

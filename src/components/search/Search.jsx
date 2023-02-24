@@ -2,9 +2,13 @@ import React from 'react'
 import './search.css'
 import image from '../../assets/post3.png'
 import image2 from '../../assets/post4.png'
+import Navbar from "../navbar/Navbar";
 
 
 const Search = () => {
+
+
+
   return (
     <div className='rb__search'>
       <input type='text' placeholder='Type to Search'/>

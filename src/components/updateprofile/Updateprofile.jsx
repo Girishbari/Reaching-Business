@@ -3,13 +3,14 @@ import './updateprofile.css'
 import image from '../../assets/login.png'
 
 
+
 const Updateprofile = () => {
   return (
     <div className="rb__updateprofile">
       <div className="rb__updateprofile-bio">
         <img src={image} />
         <div className="rb__updateprofile-bio_container">
-          <h3>Girish Bari</h3>
+          <h3>User</h3>
           <h4>Company Name</h4>
          
           <form action="/action_page.php">

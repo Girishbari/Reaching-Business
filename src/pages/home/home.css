@@ -1,52 +1,36 @@
-.rb__content{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    margin: 0 4pc 0 5.6pc;
-}
-.rb__content-post{
-    display: flex;
-}
-.rb__content-post_cards{
-    margin-right: 40px;
-    width: 130vh;
-}
-.rb__content-product {
-    display: flex;
-    flex-direction: row;
-}
-.rb__content-product button{
-    background-color: #FFFFFF;
-    border: none;
-    cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-    height: 23vh;
-}
-.rb__content-product_cards{
+.Main-Layout{
+    min-height: 100vh;
+    min-height: 100dvh;
+    
     display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+.rb__content{
+   display: grid;
+ 
+  
+}
+.rb__Homepage-content{
+    display: grid;
+    place-content: center;
     grid-auto-flow: column;
-    grid-auto-columns: 29%;
-    overflow: hidden;
+}
+.rb__products{
+    
+    margin: auto auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+   
+    gap: 2.5rem;
+}
+
+@media screen and (max-width: 500px) {
+    .rb__products{
+   
+        grid-column: span 2;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
     
 }
-
-
-
-@media screen and (max-width: 550px){
-    .rb__content{
-        display: flex;
-        justify-content: flex-start;
-        margin: 0 4pc 0 4pc;
-    }
-}
-
-@media (min-width: 320px) and (max-width: 480px) {
-    .rb__content{
-        display: flex;
-        justify-content: flex-start;
-        margin: 0 1pc 0 1pc;
-    }
-
-}
-
-

@@ -18,5 +18,20 @@ export default [
         id:1,
         image:'../../assets/post2.png',
         name:'Wires'
+    },
+    {
+        id:1,
+        image:'../../assets/post2.png',
+        name:'Wires'
+    },
+    {
+        id:1,
+        image:'../../assets/post2.png',
+        name:'Wires'
+    },
+    {
+        id:1,
+        image:'../../assets/post2.png',
+        name:'Wires'
     }
 ]

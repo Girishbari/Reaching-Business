@@ -8,7 +8,8 @@ import { FaRegUserCircle } from 'react-icons/fa'
 import image from '../../assets/post3.png'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import {Editpost} from "../editpost/Editpost"
+import { ProductPageContent } from '../../pages/home/Home'
 
 // css styling name convention bem
 const Navbar = (props) => {
@@ -39,6 +40,7 @@ const Navbar = (props) => {
 
         <div className='rb__navbar-links_container'>
           <p><li className='rb__navbar-links_option' href='#home' onClick={() => navigate('/')}>Home</li></p>
+          <p><li className='rb__navbar-links_option' href='#home' onClick={() => navigate('/ProductPageContent')}>Products</li></p>
           <div className='rb__navbar-links_container-post' >
             {post
               ? <button onClick={() => setPost(false)}>Post</button>
@@ -47,8 +49,9 @@ const Navbar = (props) => {
             {post && (
               <div className="rb__navbar-links_container-post-menu_container scale-up-center">
                 <button className='rb__navbar-links_container-post-menu_container-button1' >Edit Post</button>
-                <button className='rb__navbar-links_container-post-menu_container-button2' onClick={() => {
-                  navigate('/Editpost')
+                <button className='rb__navbar-links_container-post-menu_container-button2'
+                   onClick={() => {
+                    navigate('/EditProduct')
                 }} >Edit Product</button>
               </div>
             )}
@@ -69,13 +72,12 @@ const Navbar = (props) => {
                   <div className="rb__navbar-buttons_container-user_container-img">
                     <img src={image} />
                   </div>
-                  <h3>Hy, Girish</h3>
+                  <h3>Hy, User</h3>
                   {/* {user} */}
                   <button className='rb__navbar-buttons_container-user_container-button1' onClick={() => {
-                    props.handleUpdate()
                     navigate('/Updateprofile')
                   }}>Update</button>
-                  <button className='rb__navbar-buttons_container-user_container-button2'>Log-out</button>
+                  <button className='rb__navbar-buttons_container-user_container-button2' onClick={() => navigate('/Login')}>Log-out</button>
                 </div>
               )
             }

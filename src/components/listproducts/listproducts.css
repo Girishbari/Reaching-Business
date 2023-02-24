@@ -1,20 +1,16 @@
 .rb__listproducts{
-    width: 80vw;
-    font-family: var(--font-family);
-}
-.rb__listproducts-products{
-    display: flex;
+    
+    display: grid;
+    margin: auto auto;
+    grid-template-columns: 33% 33%;
 }
 
-.rb__listproducts-products_cards{
-    margin: 0;
-    text-align: center;
-    font-weight: 400;
-}
 
 .rb__listproducts-products_cards img{
-    width: 20vw;
-    height: 23vh;
+    min-width: 12rem;
+    width: 20rem;
+    height: 15rem;
+    min-height: 7rem;
     object-fit: cover;
     border-radius: 10px;
     cursor: pointer;

@@ -36,8 +36,8 @@ const Showproduct = () => {
                 <div className="rb__showproduct-comment_container">
                     <img src={image} alt="" className="src" />
                     <div className="rb__showproduct-comment-containe_comment">
-                        <h4>Girish BAri</h4>
-                        <p>mast lg rha be...!</p>
+                        <h4>User</h4>
+                        <p>Good</p>
                     </div>
                 </div>
                 <h3>No Comment</h3>

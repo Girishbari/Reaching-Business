@@ -7,3 +7,5 @@ export {default as Updateprofile } from './updateprofile/Updateprofile'
 export {default as Readpost } from './readpost/Readpost'
 export {default as Listproducts} from './listproducts/Listproducts';
 export {default as Showproduct} from './showproduct/Showproduct';
+export { default as Chat} from './chat/Chat'
+export {default as Editpost} from './editpost/Editpost'

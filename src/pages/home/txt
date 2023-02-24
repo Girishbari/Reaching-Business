@@ -1,0 +1,30 @@
+<div className="rb__content">
+
+<Outlet />
+{/* {editProduct && <Editpost handleClick={toggleBackPost} />}
+
+{readProduct && <Showproduct />}
+{searchbutton && <Search />} */}
+
+{!readProduct && !read && !update && !editProduct && (
+  <>
+    <div className="rb__content-post">
+      <div className="rb__content-post_cards">{cardPost}</div>
+      <Recentposts
+        id={1}
+        author="Girish bari"
+        title="Mind-Blowing Twitter Stats and Facts on Our Favorite Network (2018)"
+        className="rb__content-recentposts-section"
+      />
+    </div>
+    <div className="rb__content-product fade-in">
+      <div id="container" className="rb__content-product_cards fade-in">
+        {listOfProduct}
+      </div>
+      <button onClick={showMore}>
+        <IoMdArrowForward size={30} />
+      </button>
+    </div>
+  </>
+)}
+</div>

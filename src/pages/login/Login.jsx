@@ -4,18 +4,18 @@ import image from '../../assets/login.png'
 import { useNavigate } from 'react-router-dom'
 import { MdAlternateEmail } from 'react-icons/md'
 import { Si1Password } from 'react-icons/si'
-import { getAuth } from "firebase/auth";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import {app} from "../../firebaseConfig"
+import { useUserAuth } from '../../context/UserAuthContext';
+
+
 
 
 const Login = () => {
 
   const navigate = useNavigate();
-  const auth = getAuth(app);
-
-
   const [data, setData] = useState({});
+  const [user, setUser] = useState([])
+  const { logIn } = useUserAuth();
+  const [error, setError] = useState("");
 
 
   const handleInput = (event) =>{
@@ -23,16 +23,20 @@ const Login = () => {
     setData({...data, ...newInput});
   }
 
-  const handleSubmit = () => {
-    signInWithEmailAndPassword(auth, data.email, data.password)
-    .then((response) => {
-        console.log(response.user)
-        navigate("/")
-    })
-    .catch((err) =>{
-        alert(err.message)
-    })
+  const handleSubmit = async() => {
+      setError("");
+      try {
+        await logIn(data.email, data.password)
+        console.log("logged in  ")
+ 
+        navigate("/Home/*")
+      } catch (error) {
+        setError(error)
+        alert(error)
+      }
+  
   }
+
 
   return (
     <div className='rb__login'>

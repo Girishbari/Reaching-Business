@@ -10,6 +10,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {Editpost} from "../editpost/Editpost"
 import { ProductPageContent } from '../../pages/home/Home'
+import { useUserAuth } from '../../context/UserAuthContext'
 
 // css styling name convention bem
 const Navbar = (props) => {
@@ -18,6 +19,17 @@ const Navbar = (props) => {
   const [post, setPost] = useState(false)
   const [user, setUser] = useState(false)
   const navigate = useNavigate();
+  const { logOut } = useUserAuth();
+
+  const handleLogOut = async() =>{
+    try {
+      await logOut();
+      navigate("/")
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
 
   useEffect(() => {
     setInterval(() => {
@@ -39,7 +51,7 @@ const Navbar = (props) => {
       <div className='rb__navbar'>
 
         <div className='rb__navbar-links_container'>
-          <p><li className='rb__navbar-links_option' href='#home' onClick={() => navigate('/')}>Home</li></p>
+          <p><li className='rb__navbar-links_option' href='#home' onClick={() => navigate('/*')}>Home</li></p>
           <p><li className='rb__navbar-links_option' href='#home' onClick={() => navigate('/ProductPageContent')}>Products</li></p>
           <div className='rb__navbar-links_container-post' >
             {post
@@ -77,7 +89,12 @@ const Navbar = (props) => {
                   <button className='rb__navbar-buttons_container-user_container-button1' onClick={() => {
                     navigate('/Updateprofile')
                   }}>Update</button>
-                  <button className='rb__navbar-buttons_container-user_container-button2' onClick={() => navigate('/Login')}>Log-out</button>
+                  <button 
+                  className='rb__navbar-buttons_container-user_container-button2' 
+                  onClick={handleLogOut}
+                  >
+                      Log-out 
+                  </button>
                 </div>
               )
             }

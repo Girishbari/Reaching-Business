@@ -7,6 +7,9 @@ const Chat = () => {
     
   const [show, setShow] = useState(false)
   const [showfollowers, setShowfollowers] = useState(false)
+  const [users, getAllUsers] = useState([]);
+
+
 
   return (
     <div className='rb__chat'>
@@ -15,7 +18,7 @@ const Chat = () => {
             <IoMdAddCircle size={55} cursor='pointer' onClick={() => setShowfollowers(prevstate => !prevstate)}/>
             {showfollowers && <> 
                 <div className='rb__chat-header-group-1'>
-
+                    <div className="rb__chat-header-group-1_child"></div>
                 </div>
             </>}
             <div className='display'>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./home.css";
 import {
   Navbar,
@@ -15,11 +15,28 @@ import {
 } from "../../components";
 import image from "../../assets/post3.png";
 import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
-
 import post from "../post";
 import listproduct from "../listproduct";
 import image2 from "../../assets/post2.png";
 import { IoMdArrowForward } from "react-icons/io";
+import { useUserAuth } from "../../context/UserAuthContext";
+import { db } from "../../firebaseConfig";
+import {
+  collection,
+  getDocs,
+  getDoc,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+  query,
+  where,
+  get,
+  onSnapshot
+} from "firebase/firestore";
+import UpdateProfileService from "../../services/update.service";
+
+
 
 // Api call to all post that would be random will be here
 // and all the data would sends as props to Posts component which has posts html and css
@@ -31,15 +48,44 @@ import { IoMdArrowForward } from "react-icons/io";
 const Home = () => {
   const [editProduct, setEditProduct] = useState(false);
   const [update, setUpdate] = useState(false);
-
+  const { user } = useUserAuth();
   const [searchbutton, setSearchbutton] = useState(false);
+
+
+    useEffect(() => {
+      console.log(user.email)
+      if(user.email !== undefined){
+        // alert(user)
+        getDetailHandler();
+      }
+    }, [user])
+
+    // to get Id of logged in user, using their email, Replacing ID with mail because I cannot access ID after 5 to 6 days attempt
+    // maybe you could have used the the uid coming from user object instead of email itself
+
+    const getDetailHandler = async() =>{
+        try {
+          const details = await UpdateProfileService.getUserDetails(user.email)
+          console.log(details.data())
+        } catch (error) {
+          console.log(error.message)
+        }
+        // const q = query(userCollectionRef, where("email", "==", user.email));
+        // onSnapshot(q, (snapshot) => snapshot.docs.forEach((doc) =>{
+        //   setID({ ...doc.data(), id: doc.id})
+        // }))
+        // console.log(id.id)
+
+    }
+
 
   return (
     <div className="Main-Layout">
       <Navbar />
       <div className="rb__content">
+        
         <Routes>
-          <Route path="/" element={<HomePageContent />} />
+          <Route path="/*" element={<HomePageContent />} />
           <Route path="/Search" element={<Search />} />
           <Route path="/ProductPageContent" element={<ProductPageContent />} />
           <Route path="/Updateprofile" element={<Updateprofile />} />

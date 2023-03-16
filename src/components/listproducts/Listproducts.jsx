@@ -1,22 +1,46 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './listproducts.css'
-import { useNavigate, useParams } from "react-router-dom";
-import Showproduct from '../showproduct/Showproduct';
+import { useNavigate } from "react-router-dom";
+import { ref, getDownloadURL, listAll  } from "firebase/storage"
+import { storage } from "../../firebaseConfig";
+import Loading from '../loading/Loading';
+
 
 const Listproducts = (props) => {
 
   const navigate = useNavigate();
+  const [images, setImages] = useState(null)
+  useEffect(() =>{
+    getImage()
+    console.log(props.id)
+  },[])
+
+  const getImage = () =>{
+    const imagesListRef = ref(storage, `ProductsPics/${props.id}/Primary`);
+    listAll(imagesListRef).then((response) => {
+      response.items.forEach((item) => {
+        getDownloadURL(item).then((url) => {
+            setImages(url)
+        });
+      });
+    });
+  }
+ 
+
 
   return (
     <div className="rb__listproducts">
       <div className="rb__listproducts-products">
         <div className="rb__listproducts-products_cards" 
              onClick={() => {
-              props.handleProductClick();
-              navigate("/Showproduct");
+              navigate(`/Showproduct/${props.id}`); 
               }
               }>
-          <img src={props.image} />
+            {images ? 
+            <img src={images} />
+            : <Loading />
+            }
+       
           <h3>{props.name}</h3>
         </div>
       </div>

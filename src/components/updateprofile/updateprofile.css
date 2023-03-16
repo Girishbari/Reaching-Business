@@ -98,6 +98,31 @@
     background-color: #FF5480;
     cursor: pointer;
 }
+.rb__updateprofile-container_buttons{
+    display: flex;
+}
+
+
+.rb__updateprofile-container button{
+
+    width:max-content;
+    margin: 0 auto;
+    padding: 12px 10px;
+    font-family: var(--font-family);
+    font-weight: 600px;
+    font-weight: 400;
+    font-size: 18px;
+    border-radius: 25px;
+    border-style: none;
+    color: white;
+    background-color: #af82f7;
+    cursor: pointer;
+}
+.rb__updateprofile-container button:focus{
+    background-color: #6a5d7b;
+
+}
+
 
 @media screen and (max-width: 750px){
     .rb__updateprofile{

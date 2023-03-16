@@ -10,20 +10,29 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {Editpost} from "../editpost/Editpost"
 import { ProductPageContent } from '../../pages/home/Home'
+import { useUserAuth } from '../../context/UserAuthContext'
 
 // css styling name convention bem
 const Navbar = (props) => {
   const [togglemenu, setTogglemenu] = useState(false);
-  const [search, setSearch] = useState(false);
   const [post, setPost] = useState(false)
   const [user, setUser] = useState(false)
   const navigate = useNavigate();
+  const { logOut } = useUserAuth();
 
-  useEffect(() => {
-    setInterval(() => {
-      setPost(false)
-    }, 5000)
-  })
+  useEffect(() =>{
+      console.log(props.profileImg)
+  },[])
+
+  const handleLogOut = async() =>{
+    try {
+      await logOut();
+      navigate("/")
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
   function handleClick() {
     setPost(true)
   }
@@ -39,19 +48,22 @@ const Navbar = (props) => {
       <div className='rb__navbar'>
 
         <div className='rb__navbar-links_container'>
-          <p><li className='rb__navbar-links_option' href='#home' onClick={() => navigate('/')}>Home</li></p>
+          <p><li className='rb__navbar-links_option' href='#home' onClick={() => navigate('/*')}>Home</li></p>
           <p><li className='rb__navbar-links_option' href='#home' onClick={() => navigate('/ProductPageContent')}>Products</li></p>
-          <div className='rb__navbar-links_container-post' >
+          <div className='rb__navbar-links_container-post ' >
             {post
               ? <button onClick={() => setPost(false)}>Post</button>
               : <button onClick={() => setPost(true)}>Post</button>
             }
             {post && (
               <div className="rb__navbar-links_container-post-menu_container scale-up-center">
-                <button className='rb__navbar-links_container-post-menu_container-button1' >Edit Post</button>
+                <button className='rb__navbar-links_container-post-menu_container-button1'
+                    onClick={() => {
+                      navigate('/Editpost')
+                  }}  >Edit Post</button>
                 <button className='rb__navbar-links_container-post-menu_container-button2'
                    onClick={() => {
-                    navigate('/EditProduct')
+                    navigate('/Editproduct')
                 }} >Edit Product</button>
               </div>
             )}
@@ -70,14 +82,19 @@ const Navbar = (props) => {
               user && (
                 <div className="rb__navbar-buttons_container-user_container">
                   <div className="rb__navbar-buttons_container-user_container-img">
-                    <img src={image} />
+                    <img src={props.profileImg} />
                   </div>
-                  <h3>Hy, User</h3>
+                  <h3>Hy, {props.name}</h3>
                   {/* {user} */}
                   <button className='rb__navbar-buttons_container-user_container-button1' onClick={() => {
                     navigate('/Updateprofile')
                   }}>Update</button>
-                  <button className='rb__navbar-buttons_container-user_container-button2' onClick={() => navigate('/Login')}>Log-out</button>
+                  <button 
+                  className='rb__navbar-buttons_container-user_container-button2' 
+                  onClick={handleLogOut}
+                  >
+                      Log-out 
+                  </button>
                 </div>
               )
             }
@@ -91,7 +108,8 @@ const Navbar = (props) => {
           {togglemenu && (
             <div className='rb__navbar-menu_container scale-up-center'>
               <div className='rb__navbar-menu_container-links'>
-                <p><li className='rb__navbar-links_option' href='#home' onClick={() => navigate('/')} >Home</li></p>
+              <p><li className='rb__navbar-links_option' href='#home' onClick={() => navigate('/*')}>Home</li></p>
+             <p><li className='rb__navbar-links_option' href='#home' onClick={() => navigate('/ProductPageContent')}>Products</li></p>
                 <div className='rb__navbar-links_container-post' >
                   {post
                     ? <button onClick={() => setPost(false)}>Post</button>
@@ -105,19 +123,6 @@ const Navbar = (props) => {
                       }} >Edit Product</button>
                     </div>
                   )}
-                </div>
-              </div>
-              <div className="rb__navbar-menu_container-recentpost">
-                <h2>Recentposts</h2>
-                <div className='rb__recentpost-list'>
-                  <div className='rb__recentpost-list_post'>
-                    <h4>BY GIRISH BARI</h4>
-                    <h3>Mind-Blowing Twitter Stats and Facts on Our Favorite Network (2018)</h3>
-                  </div>
-                  <div className='rb__recentpost-list_post'>
-                    <h4>BY GIRISH BARI</h4>
-                    <h3>Mind-Blowing Twitter Stats and Facts on Our Favorite Network (2018)</h3>
-                  </div>
                 </div>
               </div>
             </div>

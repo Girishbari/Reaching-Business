@@ -31,7 +31,12 @@
     border-radius: 5px;
 }
 
-.rb__recentpost-list_post:hover {
+.rb__recentpost-list_post-child{ 
+    margin-top: 10px;
+    padding: 5px 10px;
+}
+
+.rb__recentpost-list_post-child:hover {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
@@ -101,8 +106,4 @@
     
   
 }
-@media screen and (max-width: 1050px){
-    .rb__recentpost{
-        display: none;
-    }
-}
+

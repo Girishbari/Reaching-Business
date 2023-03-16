@@ -3,7 +3,7 @@ import './footer.css'
 
 const Footer = () => {
   return (
-    <div className='rb__footer'>Made my Girish with ❤️</div>
+    <div className='rb__footer'>Made with ❤️</div>
   )
 }
 

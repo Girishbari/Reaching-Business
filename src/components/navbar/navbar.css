@@ -203,6 +203,9 @@
     .rb__navbar-links_container{
         display: none;
     }
+    .display{
+        display: show;
+    }
     .rb__navbar-menu{
         display: flex;
         list-style: none;

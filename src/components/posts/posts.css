@@ -53,6 +53,13 @@
     font-size: 16px;
     line-height: 30px;
     text-align: left;
+    overflow: hidden;
+    /* render less no of lines using css */
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* number of lines to show */
+            line-clamp: 2; 
+    -webkit-box-orient: vertical;
 }
 
 .rb__posts-container_content-content a {

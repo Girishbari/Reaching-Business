@@ -26,7 +26,7 @@ class UpdateProfileService {
 
   updateUser = (id, updatedBook) => {
     const bookDoc = doc(db, "users", id);
-    return setDoc(bookDoc, updatedBook);
+    return updateDoc(bookDoc, updatedBook);
   };
 
   getAllUsers = () => {

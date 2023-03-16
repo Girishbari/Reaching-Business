@@ -2,7 +2,7 @@ import React from "react";
 import "./register.css";
 import image from "../../assets/login.png";
 import { useState } from "react";
-import Toast from "../../components/toast/Toast";
+
 import { CgDanger } from "react-icons/cg";
 import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../context/UserAuthContext";

@@ -12,30 +12,16 @@ import {
   Chat,
   Editpost,
   Footer,
+  Editproduct,
 } from "../../components";
-import image from "../../assets/post3.png";
-import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
-import post from "../post";
-import listproduct from "../listproduct";
-import image2 from "../../assets/post2.png";
-import { IoMdArrowForward } from "react-icons/io";
-import { useUserAuth } from "../../context/UserAuthContext";
-import { db } from "../../firebaseConfig";
-import {
-  collection,
-  getDocs,
-  getDoc,
-  addDoc,
-  updateDoc,
-  deleteDoc,
-  doc,
-  query,
-  where,
-  get,
-  onSnapshot
-} from "firebase/firestore";
-import UpdateProfileService from "../../services/update.service";
 
+import { Routes, Route} from "react-router-dom";
+import { ref, getDownloadURL, listAll } from "firebase/storage";
+import { storage } from "../../firebaseConfig";
+import PostService from "../../services/post.service";
+import { useUserAuth } from "../../context/UserAuthContext";
+import UpdateProfileService from "../../services/update.service";
+import ProductService from "../../services/product.service";
 
 
 // Api call to all post that would be random will be here
@@ -46,53 +32,66 @@ import UpdateProfileService from "../../services/update.service";
 // then we again sends this IF to read Post Component
 
 const Home = () => {
-  const [editProduct, setEditProduct] = useState(false);
-  const [update, setUpdate] = useState(false);
   const { user } = useUserAuth();
-  const [searchbutton, setSearchbutton] = useState(false);
+  const [profilepic, setProfilePic] = useState(null)
+  const [details, setUserDetails] = useState({})
+  
 
 
-    useEffect(() => {
-      console.log(user.email)
-      if(user.email !== undefined){
-        // alert(user)
-        getDetailHandler();
-      }
-    }, [user])
 
-    // to get Id of logged in user, using their email, Replacing ID with mail because I cannot access ID after 5 to 6 days attempt
-    // maybe you could have used the the uid coming from user object instead of email itself
-
-    const getDetailHandler = async() =>{
-        try {
-          const details = await UpdateProfileService.getUserDetails(user.email)
-          console.log(details.data())
-        } catch (error) {
-          console.log(error.message)
-        }
-        // const q = query(userCollectionRef, where("email", "==", user.email));
-        // onSnapshot(q, (snapshot) => snapshot.docs.forEach((doc) =>{
-        //   setID({ ...doc.data(), id: doc.id})
-        // }))
-        // console.log(id.id)
-
+  useEffect(() => {
+    if (user.email !== undefined) {
+      getDetailHandler();
     }
+  }, [user]);
 
+  // to get Id of logged in user, using their email, Replacing ID with mail because I cannot access ID after 5 to 6 days attempt
+  // maybe you could have used the the uid coming from user object instead of email itself
+
+  const getDetailHandler = async () => {
+    try {
+      const response = await UpdateProfileService.getUserDetails(user.email);
+      const data =  response.data()
+      user.displayName = data.fullname
+      setUserDetails({...details, data});
+      getImage(data.profilePic)
+    } catch (error) {
+      console.log(error.message);
+    }
+  
+  };
+
+  const getImage = (pic) => {
+
+    if(pic === null) {
+       console.log("no image") 
+       return 
+    } ;
+
+    const imagesListRef = ref(storage, `ProfilePics/${user.email}`);
+    listAll(imagesListRef).then((response) => {
+      response.items.forEach((item) => {
+        getDownloadURL(item).then((url) => {
+          user.photoURL = url;
+        });
+      });
+    });
+  };
 
   return (
     <div className="Main-Layout">
-      <Navbar />
+      <Navbar   profileImg={user.photoURL} name={user.displayName} />
       <div className="rb__content">
-        
         <Routes>
           <Route path="/*" element={<HomePageContent />} />
-          <Route path="/Search" element={<Search />} />
+          <Route path="/Search" element={<Search  />} />
           <Route path="/ProductPageContent" element={<ProductPageContent />} />
           <Route path="/Updateprofile" element={<Updateprofile />} />
           <Route path="/Chat" element={<Chat />} />
-          <Route path="/Readpost" element={<Readpost />} />
-          <Route path="/Showproduct" element={<Showproduct />} />
-          <Route path="/EditProduct" element={<Editpost />} />
+          <Route path="/Showproduct/:id" element={<Showproduct />} />
+          <Route path="/Readpost/:id" element={<Readpost />} />
+          <Route path="/Editproduct" element={<Editproduct />} />
+          <Route path="/Editpost" element={<Editpost />} />
         </Routes>
       </div>
       <Footer />
@@ -102,49 +101,89 @@ const Home = () => {
 
 export default Home;
 
+
+
+
+
+
+
 export const HomePageContent = () => {
   const [read, setRead] = useState(false);
+  const [posts, setPosts] = useState([]);
+
+
+  
+  useEffect(() => {
+    getAllContent();
+  }, []);
 
   const toggleReadpost = () => {
     setRead((prevstate) => !prevstate);
   };
 
-  const cardPost = post.map((item) => {
-    return (
-      <Posts
-        key={item.id}
-        img={image}
-        author={item.author}
-        title={item.title}
-        content={item.content}
-        handlePostClick={toggleReadpost}
-      />
-    );
-  });
+  const getAllContent = async () => {
+    const data = await PostService.getAllPosts();
+    console.log(data.docs);
+    setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+  
 
   return (
     <>
       <div className="rb__Homepage-content">
-        <div className="rb__Homepage-content_cards"> 
-        {cardPost}
+        <div className="rb__Homepage-content_cards">
+          {posts.map((item, index) => {
+            return (
+              <Posts
+                key={index}
+                id={item.id}
+                img={item.PostImages}
+                author={item.PostCreator}
+                title={item.PostHeading}
+                content={item.PostContent}
+              />
+            );
+          })}
         </div>
-        <div className=""> 
-        <Recentposts
-          key={1}
-          author="Girish bari"
-          title="Mind-Blowing Twitter Stats and Facts on Our Favorite Network (2018)"
-          className="rb__content-recentposts-section"
-        />
+        <div className="">
+            <Recentposts className="rb__content-recentposts-section" />
         </div>
       </div>
     </>
   );
 };
 
+
+
+
+
+
+
 export const ProductPageContent = () => {
   const [show, setShow] = useState(2);
   const [readProduct, setReadProduct] = useState(false);
   const [scroll, setScroll] = useState(2);
+
+  const [productList, setProductList] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    // promise in useffect
+    getAllProducts();
+    
+  }, []);
+
+  const getAllProducts = async () => {
+    try {
+      const response = await ProductService.getProducts();
+      console.log(response.docs)
+      setProductList(
+        response.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const toggleReadproduct = () => {
     setReadProduct((prevstate) => !prevstate);
@@ -152,12 +191,14 @@ export const ProductPageContent = () => {
 
   // .slice(0, show)
 
-  const listOfProduct = listproduct.map((item) => {
+  const listOfProduct = productList.map((doc, index) => {
     return (
       <Listproducts
-        key={item.id}
-        image={image2}
-        name={item.name}
+        key={index}
+        id={doc.id}
+        image={doc.ProductMainImage}
+        name={doc.ProductName}
+        secondaryImages={doc.ProductSecondaryImages}
         handleProductClick={toggleReadproduct}
       />
     );

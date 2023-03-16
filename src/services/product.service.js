@@ -7,34 +7,45 @@ import {
   addDoc,
   updateDoc,
   doc,
-  setDoc
+  setDoc,
+  arrayUnion
 } from "firebase/firestore";
 
-const userCollectionRef = collection(db, "product")
+const productCollectionRef = collection(db, "product")
 
 
 class ProductService {
 
 
 
-  addProduct = (Id,newProduct) => {
-    return setDoc(doc(userCollectionRef, Id), newProduct);
+  addProduct = async (newProduct) => {
+    const docRef = await addDoc(collection(db, "product"), newProduct).then((res) => {
+      return res;
+    })
+    console.log("Document written with ID: ", docRef.id);
+    return docRef.id;
   }
 
-//   updateUser = (id, updatedBook) => {
-//     const bookDoc = doc(db, "users", id);
-//     console.log(updatedBook)
-//     return setDoc(bookDoc, updatedBook);
-//   };
+  updateProdDetail = (id, updatedBook) => {
+      const docRef = doc(db, "product", id)
+      console.log(updatedBook)
+      return updateDoc(docRef, updatedBook)
+  };
 
-//   getAllUsers = () => {
-//     return getDocs(userCollectionRef);
-//   };
+  uploadComment = async (updatedBook, id) => {
+    const postRef = doc(db, "product", id);
+    return updateDoc(postRef, {
+        ProductComments:  arrayUnion(updatedBook)
+    })
+}
+  getProducts = () => {
+    return getDocs(productCollectionRef);
+  };
 
-//   getUserDetails = (id) => {
-//     const bookDoc = doc(userCollectionRef, id);
-//     return getDoc(bookDoc);
-//   };
+  getDetail = (id) => {
+    const bookDoc = doc(productCollectionRef, id);
+    return getDoc(bookDoc);
+  };
 
 }
 

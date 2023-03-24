@@ -58,6 +58,7 @@ const Editpost = () => {
     setLoading(true);
     const newPost = {
       PostCreator: user.displayName,
+      PostCreatorEmail: user.email,
       PostHeading: data.heading,
       PostContent: data.content,
       PostImages: null,

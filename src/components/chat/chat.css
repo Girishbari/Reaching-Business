@@ -26,6 +26,7 @@
   min-width: 30ch;
   min-height: 10ch;
   background: var(--color-box);
+  font-family: var(--font-family);
 }
 .rb__chat-header-group-1{
   margin-top: 50px;
@@ -43,7 +44,7 @@
   font-family: var(--font-family); 
   gap: 5rem;
 }
-.rb__chat-header-group-1 button, h4,  input{
+.rb__chat-header-group-1 button h4  input{
   font-weight: 600;
   padding: 5px;
 }

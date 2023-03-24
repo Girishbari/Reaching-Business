@@ -29,23 +29,24 @@ const Chat = () => {
   const [show, setShow] = useState(false);
   const [showfollowers, setShowfollowers] = useState(false);
   const [messages, setMessages] = useState([]);
-  const scroll = useRef();
-  const { user } = useUserAuth();
   const [groupList, setGroupList] = useState([]);
   const [memberIn, setMemberIn] = useState([]);
   const [selectGroup, setSelectGroup] = useState(null);
   const [add, setAdded] = useState([]);
   const [groupName, setGroupName] = useState(null);
   const [updateGroupChat, setUpdateGroupChat]  = useState(false);
-  const totalGroup = useRef([]);
+  const { user } = useUserAuth();
+  
+  const scroll = useRef();
+
 
   useEffect(() => {
     const q = query(
       collection(db, "messages"),
       orderBy("createdAt"),
       limit(50)
-    );
-    const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
+    );  
+   const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
       let messages = [];
       QuerySnapshot.forEach((doc) => {
         messages.push({ ...doc.data(), id: doc.id });
@@ -53,19 +54,17 @@ const Chat = () => {
       setMessages(messages);
     });
   
-    return () => unsubscribe;
+    return () => unsubscribe; 
   }, []);
 
   useEffect(() =>{
     getGroups();
-  },[])
+  },[user])
   
   useEffect(() =>{
     if(selectGroup !== null) { 
       loadGroupChat();
     }
-
-
   },[selectGroup])
 
 
@@ -85,7 +84,6 @@ const Chat = () => {
     console.log(docSnap.data().messages)
     setMessages(docSnap.data().messages)
     setUpdateGroupChat(true)
-  
   }
 
   const getGroups = async () => {
@@ -137,6 +135,7 @@ const Chat = () => {
       <div className="rb__chat-section">
  
         <div className="rb__chat-header">
+         
           <IoMdAddCircle
             size={55}
             cursor="pointer"
@@ -179,6 +178,7 @@ const Chat = () => {
               </div>
             </>
           )}
+           <h3 style={{margin:"auto", fontSize:"30px", fontWeight:"500"}}>{selectGroup === null ? "GlobalChat" : selectGroup}</h3>
           <div className="">
             <IoMdArrowDropdown size={55} cursor="pointer" onClick={() => setShow((prevState) => !prevState)}/>
             {show && (

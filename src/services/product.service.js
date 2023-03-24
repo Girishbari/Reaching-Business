@@ -7,7 +7,6 @@ import {
   addDoc,
   updateDoc,
   doc,
-  setDoc,
   arrayUnion
 } from "firebase/firestore";
 
@@ -37,7 +36,16 @@ class ProductService {
     return updateDoc(postRef, {
         ProductComments:  arrayUnion(updatedBook)
     })
-}
+  }
+
+  addRating = (id,data) =>{
+    const ratingCollectionRef = collection(db, "ratings")
+    return addDoc(ratingCollectionRef,{
+      productID: id,
+      data
+    })
+  }
+  
   getProducts = () => {
     return getDocs(productCollectionRef);
   };

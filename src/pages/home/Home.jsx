@@ -23,14 +23,6 @@ import { useUserAuth } from "../../context/UserAuthContext";
 import UpdateProfileService from "../../services/update.service";
 import ProductService from "../../services/product.service";
 
-
-// Api call to all post that would be random will be here
-// and all the data would sends as props to Posts component which has posts html and css
-// which will render the UI for all posts
-// when user click to see any post in detail from POST component
-//Post COmp will return its ID to this comp
-// then we again sends this IF to read Post Component
-
 const Home = () => {
   const { user } = useUserAuth();
   const [profilepic, setProfilePic] = useState(null)
@@ -43,6 +35,7 @@ const Home = () => {
     if (user.email !== undefined) {
       getDetailHandler();
     }
+    console.log(user)
   }, [user]);
 
   // to get Id of logged in user, using their email, Replacing ID with mail because I cannot access ID after 5 to 6 days attempt
@@ -79,12 +72,12 @@ const Home = () => {
   };
 
   return (
-    <div className="Main-Layout">
-      <Navbar   profileImg={user.photoURL} name={user.displayName} />
+    <div className="Main-Layout" >  
+      <Navbar  profileImg={details.profilePic} name={user.displayName} />
       <div className="rb__content">
         <Routes>
           <Route path="/*" element={<HomePageContent />} />
-          <Route path="/Search" element={<Search  />} />
+          {/* <Route path="/Search" element={<Search  />} /> */}
           <Route path="/ProductPageContent" element={<ProductPageContent />} />
           <Route path="/Updateprofile" element={<Updateprofile />} />
           <Route path="/Chat" element={<Chat />} />

@@ -49,7 +49,7 @@ const Forgotpass = () => {
           >
             Verify
           </button>
-          <button onClick={() => navigate("/Login")}>Go back</button>
+          <button onClick={() => navigate("/")}>Go back</button>
         </div>
         <div className="rb__forgot-forgotpass_container">
           {/* <p>Don't know your password, <a onClick={() => navigate('/Forgotpass')}>click here</a></p> */}

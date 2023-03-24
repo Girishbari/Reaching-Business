@@ -127,8 +127,9 @@ const Readpost = () => {
     
 
       <div className="rb__readpost-content_author-container">
-        <img src={dummy} />
-        <h4>Girish BAri</h4>
+        {user.photoURL === null && <img src={dummy} />}
+        {user.photoURL !== null && <img src={user.photoURL} />}
+        <h4>{user.displayName}</h4>
         <div className="rb__readpost-content_author-container_comment">
           <h4>Comment</h4>
           <input

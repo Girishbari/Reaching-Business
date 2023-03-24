@@ -154,6 +154,45 @@
     cursor: pointer;
 }
 
+
+
+
+.rate {
+    float: right;
+    height: 60px;
+    padding: 0 auto;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:left;
+    width:1.5em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:60px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ccc;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #18003C;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #18003C;
+}
+
 @media screen and (max-width: 1050px) {
     .rb__showproduct{
         display: grid;

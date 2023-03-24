@@ -50,7 +50,7 @@ const Register = ({getUserId}) => {
       navigate("/");
     } catch (error) {
       setError(error);
-      console.log(error);
+      alert(error);
     }
   };
 
@@ -92,7 +92,7 @@ const Register = ({getUserId}) => {
         />
         <input
           name="password"
-          type="text"
+          type="password"
           placeholder="Password"
           onChange={(event) => handleInput(event)}
         />

@@ -27,9 +27,7 @@
     align-items: center;
     box-shadow: 10px 10px 5px black;
     font-family: var(--font-family);
-    font-weight: 600px;
     font-weight: 600;
-    font-size: 16px;
     border-radius: 7px;
 }
 
@@ -40,6 +38,8 @@
 }
 
 .rb__login-form_container input {
+    font-size: 20px;
+
     width: 400px;
     margin: 12px;
     padding: 17px 0 21px 45px;
@@ -68,7 +68,6 @@
 .rb__login-forgotpass_container{
     margin: 30px 0;
     font-family: var(--font-family);
-    font-weight: 600px;
     font-weight: 600;
     font-size: 15px;
     border-radius: 25px;

@@ -5,11 +5,10 @@ import { RiMenu3Line, RiCloseLine } from 'react-icons/ri'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { BsChatLeftDots } from 'react-icons/bs'
 import { FaRegUserCircle } from 'react-icons/fa'
-import image from '../../assets/post3.png'
+import dummy from "../../assets/blank-profile-picture-g0e62e6b69_1280.png"
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import {Editpost} from "../editpost/Editpost"
-import { ProductPageContent } from '../../pages/home/Home'
+
 import { useUserAuth } from '../../context/UserAuthContext'
 
 // css styling name convention bem
@@ -19,6 +18,7 @@ const Navbar = (props) => {
   const [user, setUser] = useState(false)
   const navigate = useNavigate();
   const { logOut } = useUserAuth();
+
 
   useEffect(() =>{
       console.log(props.profileImg)
@@ -72,7 +72,7 @@ const Navbar = (props) => {
 
         <div className='rb__navbar-buttons_container'>
           <BsChatLeftDots color='#18003C' size={25} cursor='pointer' onClick={() => navigate('/Chat')} />
-          <AiOutlineSearch color='#18003C' cursor='pointer' size={27} onClick={() => navigate('/Search')} />
+          {/* <AiOutlineSearch color='#18003C' cursor='pointer' size={27} onClick={() => navigate('/Search')} /> */}
           <div className="rb__navbar-buttons_container-user">
             {user
               ? <FaRegUserCircle color='#18003C' size={25} cursor='pointer' onClick={() => setUser(false)} />
@@ -82,7 +82,8 @@ const Navbar = (props) => {
               user && (
                 <div className="rb__navbar-buttons_container-user_container">
                   <div className="rb__navbar-buttons_container-user_container-img">
-                    <img src={props.profileImg} />
+                    {props.profileImg === undefined &&   <img src={dummy} />}
+                    {props.profileImg !== undefined &&   <img src={props.profileImg} />}
                   </div>
                   <h3>Hy, {props.name}</h3>
                   {/* {user} */}

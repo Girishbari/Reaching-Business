@@ -53,7 +53,7 @@ const Login = () => {
           />
         <input 
           name='password'
-          type='text' 
+          type='password' 
           placeholder='Password' 
           onChange={(event) => handleInput(event)}
           />

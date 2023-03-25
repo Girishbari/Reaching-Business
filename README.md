@@ -1,20 +1,70 @@
+### Project Title: REACHING-BUISNESS
+
+Project Description
+Reaching Business Report" is a system comprising of Web Pages which helps those retailers, wholesellers and manufacturers who want to start a business and they do not know the way, this website is going to help them to begin their business by providing the reach of already stabilized businesses. Here, a normal buyer can view all the retail users and ask what they want, Share there needs and etc, a retailer can communicate with sellers and the whole seller can communicate with the manufacturer with personal messages or through group chat. These businesses can list their products and can expand their reach, but this website is not responsible for any process of buying and selling. It provides a complete environment for growing a business according to our acceptance of our view
 
 
-In the project directory, you can run:
+You might think this is an e-commerce website but believe me it is not, It is something that's in the domain of E-commerce but not a E-commerce
 
-### `npm start`
+### Features
+  - Blog(Post) Adding
+  - Product Adding  
+  - Global Chat
+  - Group Chat (By making Group)
+  - Recent Post Section
+  - Comment feature
+  - Rating Feature
+  - Profile Updation
+  
+  
+### Technologies Used
+  - Pure Css and HTMl
+  - React-js and React Router Dom
+  - Firbase SDK
+  
+  
+  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 🏠 [Homepage]
+      ![image](https://user-images.githubusercontent.com/38005544/227711966-2d7e3f9b-662e-4673-8329-5861138251aa.png)
+      ![image](https://user-images.githubusercontent.com/38005544/227712166-6bfe0eba-87a8-494a-9d59-b177b7906e11.png)
 
 
-To install 
+
+
+### ✨ [Demo](https://reaching-buisness-f5eb0.web.app/)
+
+## Install
+
+```sh
+npm install
+```
+
+## Usage
+
+```sh
+npm run start
+```
+
+## Author
+
+👤 **Girish Bari**
+ 
+* LinkedIn: [@girishbari] (https://www.linkedin.com/in/girish-bari/)
+* Github: [@girishbari](https://github.com/girishbari)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/Kvaibhav01/Reaching-Buisness/issues).
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+## 📝 License
+
+Copyright © 2022 [Girish Bari](https://github.com/girish-bari).<br />
+
+
+***
